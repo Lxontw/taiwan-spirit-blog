@@ -1,0 +1,111 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+export async function getStaticPaths() {
+  const themes = ['fuzhe', 'plants', 'monsters', 'talismans', 'temples'];
+  return themes.map((theme) => ({
+    params: { theme }
+  }));
+}
+
+const { theme } = Astro.params;
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+
+// 篩選屬於當前 theme 的文章
+const filteredPosts = allPosts.filter((post) => post.slug.startsWith(`${theme}/`));
+
+const themeNames: Record<string, string> = {
+  fuzhe: '福澤系統',
+  plants: '植物・作物',
+  monsters: '精怪・地景',
+  talismans: '符咒・法器',
+  temples: '廟宇神靈'
+};
+
+const pageTitle = themeNames[theme as string] || theme;
+---
+
+<BlogLayout title={pageTitle}>
+  <header class="page-header">
+    <div class="breadcrumb">
+      <a href="/taiwan-spirit-blog/">首頁</a> ➔ <span>{pageTitle}</span>
+    </div>
+    <h2 class="section-title">{pageTitle}</h2>
+  </header>
+  
+  <div class="posts-grid" id="posts-list">
+    {filteredPosts.map((post) => (
+      <ArticleCard post={post} />
+    ))}
+  </div>
+  
+  {filteredPosts.length === 0 && (
+    <div class="empty-state">
+      <p>此主題下暫無文章。</p>
+    </div>
+  )}
+</BlogLayout>
+
+<script>
+  // 透過網址的 category 參數動態在客戶端做二次過濾
+  function filterByCategory() {
+    const params = new URLSearchParams(window.location.search);
+    const category = params.get('category');
+    
+    const cards = document.querySelectorAll('.article-card');
+    cards.forEach((card) => {
+      if (!category) {
+        // 如果沒有 category 參數，全部顯示
+        (card as HTMLElement).style.display = 'block';
+        return;
+      }
+      
+      const tagElement = card.querySelector('.meta-tag');
+      if (tagElement) {
+        const text = tagElement.textContent?.trim();
+        if (text !== category) {
+          (card as HTMLElement).style.display = 'none';
+        } else {
+          (card as HTMLElement).style.display = 'block';
+        }
+      }
+    });
+  }
+
+  // 監聽 View Transition 頁面切換事件重新過濾
+  document.addEventListener('astro:page-load', filterByCategory);
+</script>
+
+<style>
+  .page-header {
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1.5rem;
+  }
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+  .breadcrumb a:hover {
+    color: var(--color-gold);
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--color-gold);
+  }
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    border: 1px dashed var(--color-border);
+    color: var(--color-text-muted);
+  }
+</style>

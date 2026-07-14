@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../layouts/BlogLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const recentPosts = sortedPosts.slice(0, 6);
+---
+
+<BlogLayout title="大盤點">
+  <header class="page-header">
+    <h2 class="section-title">最新條目盤點</h2>
+    <p class="section-desc">彙整台灣山川、精怪、福澤、民俗儀式之神靈圖鑑與顯化故事。</p>
+  </header>
+  
+  <div class="posts-grid">
+    {recentPosts.map((post) => (
+      <ArticleCard post={post} />
+    ))}
+  </div>
+  
+  {recentPosts.length === 0 && (
+    <div class="empty-state">
+      <p>目前尚無文章，請在 Obsidian 中撰寫並推送以發佈您的首篇靈格誌。</p>
+    </div>
+  )}
+</BlogLayout>
+
+<style>
+  .page-header {
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1.5rem;
+  }
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--color-gold);
+    margin-bottom: 0.5rem;
+  }
+  .section-desc {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+  }
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    border: 1px dashed var(--color-border);
+    border-radius: 4px;
+    color: var(--color-text-muted);
+  }
+</style>

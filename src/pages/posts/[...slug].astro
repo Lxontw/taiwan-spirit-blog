@@ -1,0 +1,184 @@
+---
+import { getCollection } from 'astro:content';
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog');
+  return allPosts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+const { title, subtitle, category, image, date, regions, cities } = post.data;
+
+const formattedDate = new Date(date).toLocaleDateString('zh-TW', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<BlogLayout title={title}>
+  <article class="post-detail">
+    <header class="post-header">
+      <div class="breadcrumb">
+        <a href="/taiwan-spirit-blog/">首頁</a> ➔ <span>{title}</span>
+      </div>
+      
+      <h1 class="post-title">{title}</h1>
+      {subtitle && <p class="post-subtitle">{subtitle}</p>}
+      
+      <div class="post-meta">
+        <span class="meta-item">分類：{category}</span>
+        <span class="meta-item">發佈：{formattedDate}</span>
+      </div>
+      
+      {(regions.length > 0 || cities.length > 0) && (
+        <div class="post-tags">
+          {regions.map((r) => <span class="tag">🗺️ {r}</span>)}
+          {cities.map((c) => <span class="tag">📍 {c}</span>)}
+        </div>
+      )}
+    </header>
+
+    {image && (
+      <div class="post-banner">
+        <img src={image} alt={title} />
+      </div>
+    )}
+
+    <section class="post-content">
+      <Content />
+    </section>
+    
+    <footer class="post-footer">
+      <a href="javascript:history.back()" class="back-btn">
+        ➔ 返回列表
+      </a>
+    </footer>
+  </article>
+</BlogLayout>
+
+<style>
+  .post-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 0;
+  }
+  .post-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1.5rem;
+  }
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.8rem;
+  }
+  .breadcrumb a:hover {
+    color: var(--color-gold);
+  }
+  .post-title {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: var(--color-gold);
+    margin-bottom: 0.5rem;
+  }
+  .post-subtitle {
+    font-family: var(--font-cinzel);
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+  .post-meta {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1rem;
+  }
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .tag {
+    font-size: 0.8rem;
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+  .post-banner {
+    width: 100%;
+    max-height: 400px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--color-border);
+  }
+  .post-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Markdown 內文樣式 */
+  .post-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #cbd5e1;
+    letter-spacing: 0.5px;
+  }
+  .post-content :global(h2) {
+    font-family: var(--font-serif);
+    color: var(--color-gold);
+    font-size: 1.6rem;
+    margin: 2rem 0 1rem;
+    border-bottom: 1px dashed var(--color-border);
+    padding-bottom: 0.5rem;
+  }
+  .post-content :global(h3) {
+    font-family: var(--font-serif);
+    color: var(--color-gold-bright);
+    font-size: 1.3rem;
+    margin: 1.5rem 0 0.8rem;
+  }
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+  .post-content :global(ul), .post-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+  }
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .post-content :global(blockquote) {
+    border-left: 3px solid var(--color-gold);
+    padding-left: 1.5rem;
+    font-style: italic;
+    color: var(--color-text-muted);
+    margin: 1.5rem 0;
+  }
+  
+  .post-footer {
+    margin-top: 4rem;
+    border-top: 1px solid var(--color-border);
+    padding-top: 2rem;
+  }
+  .back-btn {
+    font-family: var(--font-serif);
+    color: var(--color-gold);
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .back-btn:hover {
+    color: var(--color-gold-bright);
+  }
+</style>
