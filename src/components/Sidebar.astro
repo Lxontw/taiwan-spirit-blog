@@ -31,10 +31,10 @@ allPosts.forEach((post) => {
 const themes = Object.keys(navigationData).sort();
 ---
 
-<aside class="sidebar">
+<aside class="sidebar" transition:persist>
   <div class="brand">
     <a href="/taiwan-spirit-blog/">
-      <h1 class="brand-title">台灣靈格</h1>
+      <div class="brand-title">台灣靈格</div>
       <span class="brand-subtitle">TAIWAN SPIRIT LOG</span>
     </a>
   </div>
