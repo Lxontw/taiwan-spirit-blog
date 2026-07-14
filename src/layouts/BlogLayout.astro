@@ -51,25 +51,22 @@ const { title } = Astro.props;
         
         if (!menuToggle || !sidebar || !backdrop) return;
         
-        // 移除舊的監聽器以防重複綁定
-        menuToggle.removeEventListener('click', toggleMenu);
-        backdrop.removeEventListener('click', toggleMenu);
-        
-        function toggleMenu() {
-          sidebar.classList.toggle('active');
-          backdrop.classList.toggle('active');
-          menuToggle.classList.toggle('active');
-          document.body.classList.toggle('menu-open');
+        function setMenuOpen(isOpen) {
+          sidebar.classList.toggle('active', isOpen);
+          backdrop.classList.toggle('active', isOpen);
+          menuToggle.classList.toggle('active', isOpen);
+          menuToggle.setAttribute('aria-expanded', String(isOpen));
+          document.body.classList.toggle('menu-open', isOpen);
         }
         
-        menuToggle.addEventListener('click', toggleMenu);
-        backdrop.addEventListener('click', toggleMenu);
+        menuToggle.onclick = () => setMenuOpen(!sidebar.classList.contains('active'));
+        backdrop.onclick = () => setMenuOpen(false);
+        sidebar.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', () => setMenuOpen(false), { once: true });
+        });
         
         // 換頁後自動重置選單狀態
-        sidebar.classList.remove('active');
-        backdrop.classList.remove('active');
-        menuToggle.classList.remove('active');
-        document.body.classList.remove('menu-open');
+        setMenuOpen(false);
       }
       
       setupMobileMenu();
@@ -118,7 +115,7 @@ const { title } = Astro.props;
           padding: 0 1rem;
           position: sticky;
           top: 0;
-          z-index: 1000;
+          z-index: 1020;
         }
         .mobile-brand a {
           font-family: var(--font-serif);
