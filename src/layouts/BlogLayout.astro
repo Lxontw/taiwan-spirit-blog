@@ -20,12 +20,61 @@ const { title } = Astro.props;
     <ViewTransitions />
   </head>
   <body>
+    <!-- 行動端頂部導覽列 -->
+    <header class="mobile-header">
+      <button id="menu-toggle" class="menu-btn" aria-label="打開選單">
+        <span class="btn-line"></span>
+        <span class="btn-line"></span>
+        <span class="btn-line"></span>
+      </button>
+      <div class="mobile-brand">
+        <a href="/taiwan-spirit-blog/">台灣靈格</a>
+      </div>
+      <div style="width: 40px;"></div> <!-- 佔位以平衡空間 -->
+    </header>
+
+    <!-- 行動端選單遮罩 -->
+    <div id="sidebar-backdrop" class="sidebar-backdrop"></div>
+
     <div class="layout-container">
       <Sidebar />
       <main class="main-content" transition:animate="fade">
         <slot />
       </main>
     </div>
+
+    <script is:inline>
+      function setupMobileMenu() {
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        const backdrop = document.getElementById('sidebar-backdrop');
+        
+        if (!menuToggle || !sidebar || !backdrop) return;
+        
+        // 移除舊的監聽器以防重複綁定
+        menuToggle.removeEventListener('click', toggleMenu);
+        backdrop.removeEventListener('click', toggleMenu);
+        
+        function toggleMenu() {
+          sidebar.classList.toggle('active');
+          backdrop.classList.toggle('active');
+          menuToggle.classList.toggle('active');
+          document.body.classList.toggle('menu-open');
+        }
+        
+        menuToggle.addEventListener('click', toggleMenu);
+        backdrop.addEventListener('click', toggleMenu);
+        
+        // 換頁後自動重置選單狀態
+        sidebar.classList.remove('active');
+        backdrop.classList.remove('active');
+        menuToggle.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      }
+      
+      setupMobileMenu();
+      document.addEventListener('astro:page-load', setupMobileMenu);
+    </script>
 
     <style>
       .layout-container {
@@ -39,13 +88,94 @@ const { title } = Astro.props;
         overflow-y: auto;
         height: 100vh;
       }
+      
+      /* 行動端頂部與遮罩樣式 */
+      .mobile-header {
+        display: none;
+      }
+      .sidebar-backdrop {
+        display: none;
+      }
+
       @media (max-width: 768px) {
         .layout-container {
           flex-direction: column;
         }
         .main-content {
           height: auto;
-          padding: 1rem;
+          min-height: calc(100vh - 60px);
+          padding: 1.5rem 1rem;
+        }
+        
+        /* 啟用行動端頂部導覽列 */
+        .mobile-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 60px;
+          background-color: var(--color-surface);
+          border-bottom: 1px solid var(--color-border);
+          padding: 0 1rem;
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+        }
+        .mobile-brand a {
+          font-family: var(--font-serif);
+          font-size: 1.25rem;
+          color: var(--color-gold);
+          font-weight: bold;
+          letter-spacing: 1px;
+        }
+        
+        /* 漢堡選單按鈕 */
+        .menu-btn {
+          background: none;
+          border: none;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          padding: 5px;
+          width: 40px;
+        }
+        .btn-line {
+          display: block;
+          width: 25px;
+          height: 2px;
+          background-color: var(--color-gold);
+          transition: all 0.3s ease;
+        }
+        
+        /* 漢堡按鈕動畫狀態 */
+        .menu-btn.active .btn-line:nth-child(1) {
+          transform: translateY(7px) rotate(45deg);
+        }
+        .menu-btn.active .btn-line:nth-child(2) {
+          opacity: 0;
+        }
+        .menu-btn.active .btn-line:nth-child(3) {
+          transform: translateY(-7px) rotate(-45deg);
+        }
+        
+        /* 半透明背景遮罩 */
+        .sidebar-backdrop {
+          display: block;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background-color: rgba(0, 0, 0, 0.6);
+          backdrop-filter: blur(2px);
+          z-index: 1005;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+        }
+        .sidebar-backdrop.active {
+          opacity: 1;
+          pointer-events: auto;
         }
       }
     </style>

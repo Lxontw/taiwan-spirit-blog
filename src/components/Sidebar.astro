@@ -148,15 +148,23 @@ const themes = Object.keys(navigationData).sort();
   }
   @media (max-width: 768px) {
     .sidebar {
-      width: 100%;
-      height: auto;
-      border-right: none;
-      border-bottom: 1px solid var(--color-border);
-      padding: 1rem;
+      position: fixed;
+      top: 0;
+      left: -280px; /* 隱藏在左側螢幕外 */
+      width: 280px;
+      height: 100vh;
+      z-index: 1010;
+      border-right: 1px solid var(--color-border);
+      border-bottom: none;
+      box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .sidebar.active {
+      transform: translateX(280px); /* 滑出顯示 */
     }
     .brand {
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.8rem;
     }
   }
 </style>
