@@ -6,12 +6,21 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { title, subtitle, category, image, date } = post.data;
+const { title, subtitle, category, image, date, regions } = post.data;
 const formattedDate = new Date(date).toLocaleDateString('zh-TW', {
   year: 'numeric',
   month: 'long',
   day: 'numeric'
 });
+
+// 提取內文摘要並移除 markdown 特殊語法與 frontmatter
+const summary = post.body
+  .replace(/^---[\s\S]*?---/, '') // 移除 frontmatter
+  .replace(/#+\s+[^\n]+/g, '')   // 移除 markdown 標題
+  .replace(/\[.*?\]\(.*?\)/g, '') // 移除連結文字
+  .replace(/[\n\r#*`_-]/g, ' ')   // 移除格式符號與換行
+  .trim()
+  .substring(0, 60) + '...';
 ---
 
 <article class="article-card">
@@ -37,6 +46,21 @@ const formattedDate = new Date(date).toLocaleDateString('zh-TW', {
       </div>
       <h3 class="card-title">{title}</h3>
       {subtitle && <p class="card-subtitle">{subtitle}</p>}
+      
+      <!-- 內文摘要 -->
+      <p class="card-summary">{summary}</p>
+      
+      <!-- 靈格地域 Badge -->
+      {regions && regions.length > 0 && (
+        <div class="card-tags-area">
+          <div class="regions-list">
+            {regions.slice(0, 2).map((r: string) => {
+              const shortRegion = r.replace('・', ' · ').replace('靈格區', '');
+              return <span class="region-badge">📍 {shortRegion}</span>;
+            })}
+          </div>
+        </div>
+      )}
     </div>
   </a>
 </article>
@@ -49,6 +73,14 @@ const formattedDate = new Date(date).toLocaleDateString('zh-TW', {
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  .article-card a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
   }
   .article-card:hover {
     transform: translateY(-4px);
@@ -58,15 +90,23 @@ const formattedDate = new Date(date).toLocaleDateString('zh-TW', {
   .image-area {
     position: relative;
     width: 100%;
-    height: 180px;
-    background-color: #0b0d10;
+    aspect-ratio: 4 / 3; /* 設定黃金 4:3 比例，能完美容納 1:1 的像素圖且高度適中 */
+    background: radial-gradient(circle, #15181c 0%, #080a0c 100%);
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain; /* 確保圖片不被裁切，完整呈現 */
+    image-rendering: pixelated; /* 像素銳利化 */
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .article-card:hover .card-image {
     transform: scale(1.05);
@@ -131,6 +171,9 @@ const formattedDate = new Date(date).toLocaleDateString('zh-TW', {
   /* 資訊區 */
   .info-area {
     padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
   }
   .card-meta {
     display: flex;
@@ -165,6 +208,38 @@ const formattedDate = new Date(date).toLocaleDateString('zh-TW', {
     font-size: 0.8rem;
     color: var(--color-text-muted);
     font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+  .card-summary {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0.4rem 0 0.8rem 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: justify;
+  }
+  .card-tags-area {
+    margin-top: auto; /* 將地域 Badge 推至最下方固定 */
+    border-top: 1px dashed rgba(216, 182, 109, 0.1);
+    padding-top: 0.6rem;
+  }
+  .regions-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+  .region-badge {
+    font-size: 0.7rem;
+    color: var(--color-gold);
+    opacity: 0.85;
+    background-color: rgba(216, 182, 109, 0.05);
+    padding: 0.1rem 0.35rem;
+    border-radius: 2px;
+    white-space: nowrap;
+    border: 1px solid rgba(216, 182, 109, 0.1);
   }
   
   @keyframes rotate-slow {
