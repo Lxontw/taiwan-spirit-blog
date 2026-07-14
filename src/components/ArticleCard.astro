@@ -90,19 +90,14 @@ const summary = post.body
   .image-area {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 3; /* 設定黃金 4:3 比例，能完美容納 1:1 的像素圖且高度適中 */
+    aspect-ratio: 1 / 1; /* 調整為 1:1 正方形，與 1:1 像素圖比例一致，實現 100% 完整無黑邊顯示 */
     background: radial-gradient(circle, #15181c 0%, #080a0c 100%);
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   .card-image {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain; /* 確保圖片不被裁切，完整呈現 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 比例 1:1 重合，無失真、無裁切、無黑邊完整填滿 */
     image-rendering: pixelated; /* 像素銳利化 */
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
