@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BlogLayout from '../../layouts/BlogLayout.astro';
 
 export async function getStaticPaths() {
-  const allPosts = await getCollection('blog');
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
   return allPosts.map((post) => ({
     params: { slug: post.slug },
     props: { post }
@@ -19,6 +19,15 @@ const formattedDate = new Date(date).toLocaleDateString('zh-TW', {
   month: 'long',
   day: 'numeric'
 });
+
+const theme = post.slug.split('/')[0];
+const themeNames: Record<string, string> = {
+  fuzhe: '福澤系統',
+  plants: '植物・作物',
+  monsters: '精怪・地景',
+  talismans: '符咒・法器',
+  temples: '廟宇神靈'
+};
 ---
 
 <BlogLayout title={title}>
@@ -55,8 +64,8 @@ const formattedDate = new Date(date).toLocaleDateString('zh-TW', {
     </section>
     
     <footer class="post-footer">
-      <a href="javascript:history.back()" class="back-btn">
-        ➔ 返回列表
+      <a href={`/taiwan-spirit-blog/${theme}`} class="back-btn">
+        ➔ 返回 {themeNames[theme] || '主題列表'}
       </a>
     </footer>
   </article>
