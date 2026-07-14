@@ -1,0 +1,174 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, subtitle, category, image, date } = post.data;
+const formattedDate = new Date(date).toLocaleDateString('zh-TW', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<article class="article-card">
+  <a href={`/taiwan-spirit-blog/posts/${post.slug}`}>
+    <div class="image-area">
+      {image ? (
+        <img src={image} alt={title} class="card-image" />
+      ) : (
+        <div class="card-placeholder">
+          <div class="ritual-pattern">
+            <div class="inner-circle"></div>
+            <div class="outer-decor"></div>
+          </div>
+          <div class="placeholder-text">{subtitle || 'TAIWAN SPIRIT'}</div>
+        </div>
+      )}
+    </div>
+    
+    <div class="info-area">
+      <div class="card-meta">
+        <span class="meta-tag">{category}</span>
+        <time class="meta-date">{formattedDate}</time>
+      </div>
+      <h3 class="card-title">{title}</h3>
+      {subtitle && <p class="card-subtitle">{subtitle}</p>}
+    </div>
+  </a>
+</article>
+
+<style>
+  .article-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .article-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-gold);
+    box-shadow: 0 10px 20px rgba(216, 182, 109, 0.1), 0 0 15px var(--color-glow);
+  }
+  .image-area {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    background-color: #0b0d10;
+    overflow: hidden;
+  }
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .article-card:hover .card-image {
+    transform: scale(1.05);
+  }
+  
+  /* 古典無圖占位框設計 */
+  .card-placeholder {
+    width: 100%;
+    height: 100%;
+    border: 2px dashed rgba(216, 182, 109, 0.2);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: radial-gradient(circle, rgba(46, 37, 24, 0.3) 0%, rgba(13, 15, 18, 0.8) 100%);
+  }
+  .article-card:hover .card-placeholder {
+    border-color: rgba(216, 182, 109, 0.5);
+  }
+  .ritual-pattern {
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgba(216, 182, 109, 0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 0.8rem;
+    animation: rotate-slow 20s linear infinite;
+  }
+  .inner-circle {
+    width: 40px;
+    height: 40px;
+    border: 1px dashed rgba(216, 182, 109, 0.4);
+    border-radius: 50%;
+  }
+  .outer-decor::before, .outer-decor::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(216, 182, 109, 0.2);
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  .outer-decor::after {
+    transform: translate(-50%, -50%) rotate(22.5deg);
+  }
+  .placeholder-text {
+    font-family: var(--font-cinzel);
+    font-size: 0.75rem;
+    color: var(--color-gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+  
+  /* 資訊區 */
+  .info-area {
+    padding: 1.25rem;
+  }
+  .card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  .meta-tag {
+    font-size: 0.75rem;
+    color: var(--color-gold);
+    background-color: rgba(216, 182, 109, 0.1);
+    padding: 0.15rem 0.4rem;
+    border-radius: 2px;
+    border: 1px solid rgba(216, 182, 109, 0.15);
+  }
+  .meta-date {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
+  .card-title {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+    transition: color 0.2s;
+  }
+  .article-card:hover .card-title {
+    color: var(--color-gold-bright);
+  }
+  .card-subtitle {
+    font-family: var(--font-cinzel);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+  
+  @keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+</style>
