@@ -2,6 +2,7 @@
 title: "諸羅樹蛙"
 category: "樹蛙／南部地域型"
 date: 2026-07-14
+image: "/taiwan-spirit-blog/assets/images/fuzhe/chulo-tree-frog.jpg"
 regions: ["南部平原・地下祖靈城靈格區"]
 cities: ["雲林","嘉義","台南"]
 tags: ["諸羅福澤","竹林福澤","稻田福澤","雨夜守田蛙"]

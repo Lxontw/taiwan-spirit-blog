@@ -2,6 +2,7 @@
 title: "澤蛙"
 category: "蛙／田野水澤型"
 date: 2026-07-14
+image: "/taiwan-spirit-blog/assets/images/fuzhe/paddy-frog.jpg"
 regions: ["南部平原・地下祖靈城靈格區","中部河階・陶土靈格區","北部盆地・河口靈格區"]
 cities: ["農田","水田","低地水域"]
 tags: ["田頭福澤","水田小福澤","溝渠守護蛙"]

@@ -2,6 +2,7 @@
 title: "橙腹樹蛙"
 category: "樹蛙／稀有森林型"
 date: 2026-07-14
+image: "/taiwan-spirit-blog/assets/images/fuzhe/orange-belly-tree-frog.jpg"
 regions: ["東部縱谷・玉石祖靈靈格區"]
 cities: ["台東知本","利嘉","海岸山脈","東部森林"]
 tags: ["橙腹福澤","玉眼福澤","森林隱者"]

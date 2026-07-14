@@ -2,6 +2,7 @@
 title: "褐樹蛙"
 category: "樹蛙／丘陵溪流型"
 date: 2026-07-14
+image: "/taiwan-spirit-blog/assets/images/fuzhe/brown-tree-frog.jpg"
 regions: ["西北丘陵・客庄古道靈格區","中部河階・陶土靈格區","南部平原・地下祖靈城靈格區","山林內陸・霧石靈格區"]
 cities: ["低海拔丘陵","溪流周邊","山腳水澤"]
 tags: ["水頭福澤","山坑福澤","丘陵溪流福澤"]

@@ -29,16 +29,16 @@ A high-quality 32-bit retro pixel art illustration of [主角或物件名稱] ([
 
 | 狀態 | 條目名稱 | 學名/副標題 | 子分類 | 本地檔案連結 |
 | :---: | :--- | :--- | :--- | :--- |
-| ❌ 缺圖 | **盤古蟾蜍** | ** | 蟾蜍／全台普遍型 | [bankorensis-toad.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/bankorensis-toad.md) |
-| ❌ 缺圖 | **褐樹蛙** | ** | 樹蛙／丘陵溪流型 | [brown-tree-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/brown-tree-frog.md) |
-| ❌ 缺圖 | **諸羅樹蛙** | ** | 樹蛙／南部地域型 | [chulo-tree-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/chulo-tree-frog.md) |
-| ❌ 缺圖 | **艾氏樹蛙** | ** | 樹蛙／樹洞竹洞型 | [eiffinger-tree-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/eiffinger-tree-frog.md) |
-| ❌ 缺圖 | **莫氏樹蛙** | ** | 樹蛙／全台山林型 | [moltrecht-tree-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/moltrecht-tree-frog.md) |
-| ❌ 缺圖 | **橙腹樹蛙** | ** | 樹蛙／稀有森林型 | [orange-belly-tree-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/orange-belly-tree-frog.md) |
-| ❌ 缺圖 | **澤蛙** | ** | 蛙／田野水澤型 | [paddy-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/paddy-frog.md) |
-| ❌ 缺圖 | **斯文豪氏赤蛙** | ** | 赤蛙／溪流型 | [swinhoe-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/swinhoe-frog.md) |
+| ✅ 有圖 | **盤古蟾蜍** | ** | 蟾蜍／全台普遍型 | [bankorensis-toad.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/bankorensis-toad.md) |
+| ✅ 有圖 | **褐樹蛙** | ** | 樹蛙／丘陵溪流型 | [brown-tree-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/brown-tree-frog.md) |
+| ✅ 有圖 | **諸羅樹蛙** | ** | 樹蛙／南部地域型 | [chulo-tree-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/chulo-tree-frog.md) |
+| ✅ 有圖 | **艾氏樹蛙** | ** | 樹蛙／樹洞竹洞型 | [eiffinger-tree-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/eiffinger-tree-frog.md) |
+| ✅ 有圖 | **莫氏樹蛙** | ** | 樹蛙／全台山林型 | [moltrecht-tree-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/moltrecht-tree-frog.md) |
+| ✅ 有圖 | **橙腹樹蛙** | ** | 樹蛙／稀有森林型 | [orange-belly-tree-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/orange-belly-tree-frog.md) |
+| ✅ 有圖 | **澤蛙** | ** | 蛙／田野水澤型 | [paddy-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/paddy-frog.md) |
+| ✅ 有圖 | **斯文豪氏赤蛙** | ** | 赤蛙／溪流型 | [swinhoe-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/swinhoe-frog.md) |
 | ✅ 有圖 | **台北樹蛙** | ** | 樹蛙／北部地域型 | [taipei-tree-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/taipei-tree-frog.md) |
-| ❌ 缺圖 | **白頷樹蛙** | ** | 樹蛙／低地水域型 | [white-lipped-tree-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/white-lipped-tree-frog.md) |
+| ✅ 有圖 | **白頷樹蛙** | ** | 樹蛙／低地水域型 | [white-lipped-tree-frog.md](file:///Users/imacpro3/Documents/Obsidian/Lxon_Obsidian/Projects/《台灣靈格》部落格/src/content/blog/fuzhe/white-lipped-tree-frog.md) |
 
 
 ## 📂 精怪・地景 (44 筆)

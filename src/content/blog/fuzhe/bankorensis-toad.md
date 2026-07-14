@@ -2,6 +2,7 @@
 title: "盤古蟾蜍"
 category: "蟾蜍／全台普遍型"
 date: 2026-07-14
+image: "/taiwan-spirit-blog/assets/images/fuzhe/bankorensis-toad.jpg"
 regions: ["北部盆地・河口靈格區","西北丘陵・客庄古道靈格區","中部河階・陶土靈格區","南部平原・地下祖靈城靈格區","東部縱谷・玉石祖靈靈格區","山林內陸・霧石靈格區"]
 cities: ["全台","平地到高山","農地","山路","步道"]
 tags: ["田頭蟾蜍福澤","山口福澤","夜路守護者","高山蟾蜍福澤"]
