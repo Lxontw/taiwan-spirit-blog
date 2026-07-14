@@ -1,0 +1,53 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import Sidebar from '../components/Sidebar.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | 《台灣靈格》部落格</title>
+    <link rel="icon" type="image/svg+xml" href="/taiwan-spirit-blog/favicon.svg" />
+    <ViewTransitions />
+  </head>
+  <body>
+    <div class="layout-container">
+      <Sidebar />
+      <main class="main-content" transition:animate="fade">
+        <slot />
+      </main>
+    </div>
+
+    <style>
+      .layout-container {
+        display: flex;
+        min-height: 100vh;
+      }
+      .main-content {
+        flex: 1;
+        padding: 2rem;
+        background-color: var(--color-bg);
+        overflow-y: auto;
+        height: 100vh;
+      }
+      @media (max-width: 768px) {
+        .layout-container {
+          flex-direction: column;
+        }
+        .main-content {
+          height: auto;
+          padding: 1rem;
+        }
+      }
+    </style>
+  </body>
+</html>

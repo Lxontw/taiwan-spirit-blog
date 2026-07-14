@@ -1,0 +1,162 @@
+---
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+
+// 動態彙整主題與子分類結構
+// theme 來自檔案 path 的子目錄名稱 (例如: blog/plants/xxx.md -> theme 為 plants)
+const navigationData: Record<string, Set<string>> = {};
+
+// 主題中文對照表
+const themeNames: Record<string, string> = {
+  fuzhe: '福澤系統',
+  plants: '植物・作物',
+  monsters: '精怪・地景',
+  talismans: '符咒・法器',
+  temples: '廟宇神靈'
+};
+
+allPosts.forEach((post) => {
+  const parts = post.slug.split('/');
+  if (parts.length > 1) {
+    const theme = parts[0];
+    const category = post.data.category;
+    if (!navigationData[theme]) {
+      navigationData[theme] = new Set();
+    }
+    navigationData[theme].add(category);
+  }
+});
+
+const themes = Object.keys(navigationData).sort();
+---
+
+<aside class="sidebar">
+  <div class="brand">
+    <a href="/taiwan-spirit-blog/">
+      <h1 class="brand-title">台灣靈格</h1>
+      <span class="brand-subtitle">TAIWAN SPIRIT LOG</span>
+    </a>
+  </div>
+  
+  <nav class="nav-tree">
+    {themes.map((theme) => (
+      <details class="theme-group" open>
+        <summary class="theme-summary">
+          <span class="gold-bullet">✦</span>
+          {themeNames[theme] || theme}
+        </summary>
+        <ul class="category-list">
+          <li>
+            <a href={`/taiwan-spirit-blog/${theme}`} class="category-link all-link">
+              全部條目
+            </a>
+          </li>
+          {Array.from(navigationData[theme]).sort().map((category) => (
+            <li>
+              <a 
+                href={`/taiwan-spirit-blog/${theme}?category=${encodeURIComponent(category)}`} 
+                class="category-link"
+              >
+                {category}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </details>
+    ))}
+  </nav>
+</aside>
+
+<style>
+  .sidebar {
+    width: 280px;
+    background-color: var(--color-surface);
+    border-right: 1px solid var(--color-border);
+    padding: 2rem 1.5rem;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .brand {
+    margin-bottom: 2rem;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1.5rem;
+  }
+  .brand-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--color-gold);
+    letter-spacing: 2px;
+  }
+  .brand-subtitle {
+    font-family: var(--font-cinzel);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    letter-spacing: 3px;
+  }
+  .nav-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .theme-group {
+    border-bottom: 1px dashed rgba(216, 182, 109, 0.1);
+    padding-bottom: 1rem;
+  }
+  .theme-summary {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    color: var(--color-gold);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    font-size: 1.05rem;
+  }
+  .theme-summary::-webkit-details-marker {
+    display: none;
+  }
+  .gold-bullet {
+    font-size: 0.8rem;
+    transition: transform 0.3s;
+  }
+  .theme-group[open] .gold-bullet {
+    transform: rotate(45deg);
+  }
+  .category-list {
+    list-style: none;
+    padding-left: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .category-link {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    display: block;
+    padding: 0.25rem 0;
+    transition: color 0.2s;
+  }
+  .category-link:hover {
+    color: var(--color-gold-bright);
+  }
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+      padding: 1rem;
+    }
+    .brand {
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+</style>
