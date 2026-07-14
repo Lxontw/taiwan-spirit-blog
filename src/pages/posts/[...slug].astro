@@ -146,12 +146,11 @@ const themeNames: Record<string, string> = {
     overflow: hidden;
     border: 1px solid var(--color-border);
     background: radial-gradient(circle, #15181c 0%, #080a0c 100%);
-    aspect-ratio: 1 / 1; /* 鎖定 1:1 正方形 */
   }
   .post-banner img {
+    display: block;
     width: 100%;
-    height: 100%;
-    object-fit: contain; /* 完整展現 1:1 像素插圖，消除任何裁切 */
+    height: auto; /* 高度完全依據圖片原比例自適應，實現 100% 完整無損展示，消除任何裁切與黑邊 */
     image-rendering: pixelated; /* 像素圖銳利優化 */
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
