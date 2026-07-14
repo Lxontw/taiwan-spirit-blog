@@ -10,7 +10,7 @@ draft: false
 ---
 
 【快速提示】
-溪流型蛙，叫聲像鳥，適合溪谷、水石、山澗與鳥鳴意象。圖片參考搜尋：斯文豪氏赤蛙 Odorrana swinhoana
+溪流型蛙，叫聲像鳥，適合溪谷、水石、山澗與鳥鳴意象。圖片參考搜尋：[斯文豪氏赤蛙 Odorrana swinhoana](https://www.google.com/search?tbm=isch&q=%E6%96%AF%E6%96%87%E8%B1%AA%E6%B0%8F%E8%B5%A4%E8%9B%99%20Odorrana%20swinhoana)
 
 ## 靈格轉化可能
 - 溪澗福澤
