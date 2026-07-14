@@ -10,7 +10,9 @@ draft: false
 ---
 
 【快速提示】
-名字與水澤、田野直接連結，適合普遍型田邊福澤。圖片參考搜尋：[澤蛙 Fejervarya limnocharis](https://www.google.com/search?tbm=isch&q=%E6%BE%A4%E8%9B%99%20Fejervarya%20limnocharis)
+名字與水澤、田野直接連結，適合普遍型田邊福澤。
+
+圖片參考搜尋：[澤蛙 Fejervarya limnocharis](https://www.google.com/search?tbm=isch&q=%E6%BE%A4%E8%9B%99%20Fejervarya%20limnocharis)
 
 ## 靈格轉化可能
 - 田頭福澤

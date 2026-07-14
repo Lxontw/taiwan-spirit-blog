@@ -9,21 +9,19 @@ files.forEach(file => {
   const filePath = path.join(blogDir, file);
   let content = fs.readFileSync(filePath, 'utf8');
   
-  // 匹配 "圖片參考搜尋：關鍵字"
-  const regex = /圖片參考搜尋：([^\n\r]+)/g;
+  // 匹配前文與 "圖片參考搜尋"，將其換行獨立段落（往下一行）
+  // 支援原本為 "。圖片參考搜尋：" 或 "，圖片參考搜尋：" 的形式
+  const regex = /[。，]\s*圖片參考搜尋：/g;
   
   if (regex.test(content)) {
-    content = content.replace(/圖片參考搜尋：([^\n\r]+)/g, (match, query) => {
-      // 防止重複連結化
-      if (query.includes('http')) return match;
-      const cleanQuery = query.trim();
-      const encodedQuery = encodeURIComponent(cleanQuery);
-      return `圖片參考搜尋：[${cleanQuery}](https://www.google.com/search?tbm=isch&q=${encodedQuery})`;
+    content = content.replace(/[。，]\s*圖片參考搜尋：/g, (match) => {
+      const punc = match[0]; // 保留原有的句號或逗號
+      return `${punc}\n\n圖片參考搜尋：`;
     });
     
     fs.writeFileSync(filePath, content, 'utf8');
-    console.log(`Linkified search query for: ${file}`);
+    console.log(`Markdown formatted and linkified for: ${file}`);
   }
 });
 
-console.log('Linkify search complete!');
+console.log('Markdown formatting complete!');

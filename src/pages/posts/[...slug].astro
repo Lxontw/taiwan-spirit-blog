@@ -69,6 +69,22 @@ const themeNames: Record<string, string> = {
       </a>
     </footer>
   </article>
+
+  <script is:inline>
+    function setupExternalLinks() {
+      const contentArea = document.querySelector('.post-content');
+      if (!contentArea) return;
+      const links = contentArea.querySelectorAll('a');
+      links.forEach(link => {
+        if (link.hostname !== window.location.hostname) {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener noreferrer');
+        }
+      });
+    }
+    setupExternalLinks();
+    document.addEventListener('astro:page-load', setupExternalLinks);
+  </script>
 </BlogLayout>
 
 <style>

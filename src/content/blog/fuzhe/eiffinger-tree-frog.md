@@ -10,7 +10,9 @@ draft: false
 ---
 
 【快速提示】
-可連到樹洞、竹洞與小型隱棲空間，適合古道與山林小福澤。圖片參考搜尋：[艾氏樹蛙 Kurixalus eiffingeri](https://www.google.com/search?tbm=isch&q=%E8%89%BE%E6%B0%8F%E6%A8%B9%E8%9B%99%20Kurixalus%20eiffingeri)
+可連到樹洞、竹洞與小型隱棲空間，適合古道與山林小福澤。
+
+圖片參考搜尋：[艾氏樹蛙 Kurixalus eiffingeri](https://www.google.com/search?tbm=isch&q=%E8%89%BE%E6%B0%8F%E6%A8%B9%E8%9B%99%20Kurixalus%20eiffingeri)
 
 ## 靈格轉化可能
 - 樹洞福澤

@@ -10,7 +10,9 @@ draft: false
 ---
 
 【快速提示】
-厚重、夜行、常在路邊與步道出現，適合山口、田邊、夜路守護。圖片參考搜尋：[盤古蟾蜍 Bufo bankorensis](https://www.google.com/search?tbm=isch&q=%E7%9B%A4%E5%8F%A4%E8%9F%BE%E8%9C%8D%20Bufo%20bankorensis)
+厚重、夜行、常在路邊與步道出現，適合山口、田邊、夜路守護。
+
+圖片參考搜尋：[盤古蟾蜍 Bufo bankorensis](https://www.google.com/search?tbm=isch&q=%E7%9B%A4%E5%8F%A4%E8%9F%BE%E8%9C%8D%20Bufo%20bankorensis)
 
 ## 靈格轉化可能
 - 田頭蟾蜍福澤
