@@ -2,7 +2,7 @@
 title: "台北樹蛙"
 category: "樹蛙／北部地域型"
 date: 2026-07-14
-image: "/taiwan-spirit-blog/assets/images/taipei-tree-frog.jpg"
+image: "/taiwan-spirit-blog/assets/images/fuzhe/taipei-tree-frog.jpg"
 regions: ["北部盆地・河口靈格區"]
 cities: ["台北","新北","桃園","中部以北中低海拔"]
 tags: ["盆地福澤","都市濕地福澤","樹林底層守護蛙"]
